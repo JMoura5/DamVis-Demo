@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>DamVis</title>
+
+    <!-- CSS -->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.css" rel="stylesheet">
+    <link href="vendor/sb-admin-2/css/sb-admin-2.css" rel="stylesheet">
+    <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="css/index.css" rel="stylesheet" type="text/css">
+    <link href="css/tooltip.css" rel="stylesheet" type="text/css">
+
+    <!-- JS -->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.min.js"></script>
+    <script src="vendor/metisMenu/metisMenu.min.js"></script>
+    <script src="vendor/sb-admin-2/js/sb-admin-2.js"></script>
+    <script src="vendor/three.js"></script>
+    <script src="vendor/trackballControls.js"></script>
+    <script src="vendor/lut.js"></script>
+    <script src="vendor/d3.v4.js"></script>
+    <script src="vendor/moment-with-locales.js"></script>
+    <script src="vendor/bootstrap-datetimepicker/bootstrap-datetimepicker.min.js"></script>
+</head>
+<body>
+    <div id="wrapper">
+        <!-- Navigation -->
+        <nav class="navbar navbar-default navbar-static-top" role="navigation">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="/">DamVis - Monitoring and Visualization System for Dam data.</a>
+            </div>
+            <!-- /.navbar-header -->
+        </nav>
+
+        <div class="container-fluid main-container" id="page-wrapper">
+            <div id="sidebar" class="col-lg-2 navbar-default sidebar" role="navigation">
+                <div class="sidebar-nav navbar-collapse">
+                    <ul class="nav" id="side-menu">
+                        <li class="nav-header">
+                            Visualizations
+                        </li>
+                        <li id="water-level-nav">
+                            <a class="active"><i class="fa fa-dashboard fa-fw"></i> Water Level</a>
+                        </li>
+                        <li id="accelerograms-nav">
+                            <a><i class="fa fa-bar-chart-o fa-fw"></i> Accelerograms</a>
+                        </li>
+                        <li id="fdd-nav">
+                            <a><i class="fa fa-table fa-fw"></i> FDD-SV</a>
+                        </li>
+                        <li id="threed-model-nav">
+                            <a><i class="fa fa-edit fa-fw"></i> 3D Finite Element Model</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!-- /.navbar-static-side -->
+            <div class="col-lg-10" id="content">
+                <div id="water-level-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="section-title" id="water-level-title">Water Level</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-bar-chart-o fa-fw"></i> Water Level
+                                    <div class="form-group pull-right">
+                                        <div class='input-group date' id='date-time-picker'>
+                                            <input type='text' class="form-control" />
+                                            <span id="date-time-picker-span" class="input-group-addon">
+                                                <span class="glyphicon glyphicon-calendar"></span>
+                                            </span>
+                                            <span id="date-time-picker-ok" class="input-group-btn">
+                                                <span class="glyphicon glyphicon-ok"></span>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body">
+                                    <div class="col-lg-8 col-sm-12" id="water-level">
+
+                                    </div>
+                                    <div class="col-lg-4 col-sm-12 disabled" id="sensor-schema">
+
+                                    </div>
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+
+                <div class="hide" id="accelerograms-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="section-title" id="accelerograms-title">Accelerograms</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-bar-chart-o fa-fw"></i> Accelerograms
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body" id="accelerograms">
+
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+
+                <div class="hide" id="fdd-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="section-title" id="fdd-title">FDD-SV</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-bar-chart-o fa-fw"></i> Frequency Domain Decomposition - Singular Value (FDD-SV)
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body" id="fdd">
+                                    <div class="col-lg-7 col-sm-12 hide" id="fdd-spectrum">
+
+                                    </div>
+                                    <div class="col-lg-5 col-sm-12 hide" id="fdd-displacement-3d">
+
+                                    </div>
+                                    <div class="col-lg-7 col-sm-12 hide" id="fdd-displacement">
+
+                                    </div>
+                                    <div class="col-lg-5 col-sm-12 list-group hide" id="fdd-displacement-list">
+
+                                    </div>
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+
+                <div class="hide" id="threed-model-wrapper">
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <h1 class="section-title" id="threed-model-title">3D Finite Element Model</h1>
+                        </div>
+                        <!-- /.col-lg-12 -->
+                    </div>
+                    <!-- /.row -->
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="panel panel-default">
+                                <div class="panel-heading">
+                                    <i class="fa fa-bar-chart-o fa-fw"></i> 3D Finite Element Model
+                                </div>
+                                <!-- /.panel-heading -->
+                                <div class="panel-body" id="threed-model">
+                                    <div class="col-lg-7 col-sm-12 hide" id="threed-fdd-spectrum">
+
+                                    </div>
+                                    <div class="col-lg-5 col-sm-12 hide" id="threed-model-options">
+                                        <p>
+                                            <strong class="primary-color">Maximum Water Level:</strong> 297 meters
+                                        </p>
+                                        <p>
+                                            <strong class="primary-color">Water Weight:</strong> 10 kN/m3
+                                        </p>
+                                        <div class="radio-group">
+                                            <label class="primary-color">3D Displacement:</label>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="radioDisplacement" checked="true">Observed and Calculated Displacement
+                                                </label>
+                                            </div>
+                                            <div class="radio">
+                                                <label>
+                                                    <input type="radio" name="optionsRadios" id="radioDifference">Difference Between Observed and Calculated Displacement
+                                                </label>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 hide" id="threed-model-observed">
+
+                                    </div>
+                                    <div class="col-lg-6 col-sm-12 hide" id="threed-model-calculated">
+
+                                    </div>
+                                    <div class="col-lg-6 col-lg-offset-3 col-sm-12 hide" id="threed-model-difference">
+
+                                    </div>
+                                </div>
+                                <!-- /.panel-body -->
+                            </div>
+                            <!-- /.panel -->
+                        </div>
+                        <!-- /.row -->
+                    </div>
+                </div>
+
+            </div>
+            <!-- /#page-wrapper -->
+        </div>
+        <!-- /#wrapper -->
+    </div>
+    <div id="tooltip" class="tooltip"></div>
+
+    <!-- JS -->
+    <script type="text/javascript" src="js/config.js"></script>
+    <script type="text/javascript" src="js/utils.js"></script>
+    <script type="text/javascript" src="js/3DModel.js"></script>
+    <script type="text/javascript" src="js/3DFEModel.js"></script>
+    <script type="text/javascript" src="js/waterLevel.js"></script>
+    <script type="text/javascript" src="js/sensorSchema.js"></script>
+    <script type="text/javascript" src="js/accelerograms.js"></script>
+    <script type="text/javascript" src="js/fdd.js"></script>
+
+    <script type="text/javascript" src="js/init.js"></script>
+</body>
+</html>

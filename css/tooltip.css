@@ -1,0 +1,26 @@
+.tooltip {
+  position: absolute;
+  background: rgba(125, 125, 125, 0.9);
+  color: #fff;
+  padding: 10px;
+  border: 1px solid #ddd;
+
+  font-family: Verdana;
+  font-size: 1em;
+  text-align: center;
+
+  -moz-box-shadow: 4px 4px 12px rgba(0,0,0,.5);
+  -webkit-box-shadow: 4px 4px 12px rgba(0,0,0,.5);
+  box-shadow: 4px 4px 12px rgba(0,0,0,.5);
+
+  -moz-border-radius: 15px;
+  border-radius: 15px;
+}
+
+.tooltip h3,
+.tooltip p,
+.tooltip span {
+  margin: 0;
+  padding: 0;
+  text-align: center;
+}
