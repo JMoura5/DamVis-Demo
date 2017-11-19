@@ -1,4 +1,4 @@
-$.getJSON('../data/3DModel.json', function(data) {
+$.getJSON('3DModel.json', function(data) {
     config.dam3dModel = data;
 });
 
@@ -36,7 +36,7 @@ function selectTime(date, waterLevel, panelTitle) {
     }
 
 
-    $.getJSON('../data/14021412.json', function(_data) {
+    $.getJSON('14021412.json', function(_data) {
         config.sensorData['14021412'] = _data;
         console.log('data request finished');
     });

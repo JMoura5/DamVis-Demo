@@ -58,7 +58,7 @@ function initWaterLevel(containerID) {
 
     var clickedLine;
 
-    $.getJSON('../data/Cota.json', function(_data) {
+    $.getJSON('Cota.json', function(_data) {
 
         data = _data.map(function(d) {
             return {
